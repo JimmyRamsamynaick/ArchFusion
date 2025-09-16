@@ -251,23 +251,29 @@ Ce projet est sous licence **GPL-3.0**. Voir le fichier [LICENSE](LICENSE) pour 
 
 ## 🚀 Roadmap
 
-### Version 1.1 (Q2 2024)
-- [ ] Installateur web moderne
-- [ ] Support Wayland complet
-- [ ] Thèmes additionnels
-- [ ] Optimisations gaming avancées
+### Version 1.1 (Q2 2025)
+- [ ] **Installateur web moderne** - Interface d'installation basée sur navigateur
+- [ ] **Support Wayland complet** - Migration complète vers Wayland avec optimisations
+- [ ] **Thèmes additionnels** - Pack de thèmes Dark/Light/Gaming personnalisables
+- [ ] **Optimisations gaming avancées** - GameMode, FSR, optimisations GPU automatiques
 
-### Version 1.2 (Q3 2024)
-- [ ] Support ARM64
-- [ ] Containers intégrés
-- [ ] Synchronisation cloud
-- [ ] Assistant IA intégré
+### Version 1.2 (Q3 2025)
+- [ ] **Support ARM64** - Compatibilité Apple Silicon et processeurs ARM
+- [ ] **Containers intégrés** - Docker/Podman préconfiguré avec interface graphique
+- [ ] **Synchronisation cloud** - Backup automatique des configurations utilisateur
+- [ ] **Assistant IA intégré** - Aide contextuelle et résolution automatique de problèmes
 
-### Version 2.0 (Q4 2024)
-- [ ] Nouvelle architecture modulaire
-- [ ] Store d'applications intégré
-- [ ] Système de mise à jour atomique
-- [ ] Interface utilisateur révolutionnaire
+### Version 2.0 (Q4 2025)
+- [ ] **Nouvelle architecture modulaire** - Système de modules plug-and-play
+- [ ] **Store d'applications intégré** - Gestionnaire graphique unifié (Pacman + AUR + Flatpak)
+- [ ] **Système de mise à jour atomique** - Mises à jour sans interruption avec rollback
+- [ ] **Interface utilisateur révolutionnaire** - UI adaptive avec IA et gestes avancés
+
+### Version 2.1 (Q1 2026)
+- [ ] **Écosystème mobile** - Synchronisation avec appareils Android/iOS
+- [ ] **Virtualisation native** - Machines virtuelles intégrées avec GPU passthrough
+- [ ] **Développement collaboratif** - Outils de développement en équipe intégrés
+- [ ] **Intelligence prédictive** - Optimisations automatiques basées sur l'usage
 
 ---
 
