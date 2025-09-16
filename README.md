@@ -175,22 +175,31 @@ sudo mkarchiso -v -w work/ -o output/ archiso/
 # L'ISO sera disponible dans output/
 ```
 
-## 🚀 Génération d'ISO
+## 💿 Génération d'ISO
 
-### Script Principal
+Pour créer une ISO bootable d'ArchFusion OS :
+
 ```bash
-# Générer une ISO bootable avec vrais bootloaders
-./create-real-bootable-iso.sh
+# Script principal - Compatible Hyper-V (recommandé)
+./create-hyper-v-compatible-iso.sh
+
+# Alternative avec archiso (Linux uniquement)
+./build-iso.sh
 ```
 
 ### Compatibilité
-- ✅ **Hyper-V Generation 2** (UEFI)
-- ✅ **VirtualBox** (BIOS + UEFI)
-- ✅ **VMware** (BIOS + UEFI)
-- ✅ **QEMU** (BIOS + UEFI)
 
-### Résolution de Problèmes
-Consultez le [Guide de Diagnostic Hyper-V](HYPER-V-TROUBLESHOOTING.md) pour résoudre les problèmes de boot.
+- ✅ **Hyper-V Generation 2** - Support UEFI optimisé avec bootloader GRUB
+- ✅ **VirtualBox** - BIOS et UEFI
+- ✅ **VMware** - Toutes versions
+- ✅ **QEMU/KVM** - Support complet
+- ✅ **Matériel physique** - BIOS Legacy et UEFI
+
+### Résolution de Problèmes Hyper-V
+
+Si vous rencontrez des problèmes de démarrage sur Hyper-V, consultez notre [Guide de Diagnostic Hyper-V](HYPER-V-TROUBLESHOOTING.md).
+
+**Note :** Le script `create-hyper-v-compatible-iso.sh` génère une ISO spécialement optimisée pour Hyper-V avec un bootloader UEFI fonctionnel.
 
 ## 🤝 Contribution
 
