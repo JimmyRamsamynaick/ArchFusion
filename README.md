@@ -1,209 +1,282 @@
-# 🔥 ArchFusion OS
+# 🚀 ArchFusion OS
 
-<div align="center">
+**Une distribution Linux moderne basée sur Arch Linux, conçue pour offrir une expérience utilisateur exceptionnelle avec la puissance et la flexibilité d'Arch.**
 
-![ArchFusion Logo](assets/logo.png)
+![ArchFusion OS](https://img.shields.io/badge/ArchFusion-OS-blue?style=for-the-badge&logo=arch-linux)
+![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
+![License](https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge)
 
-**Distribution Linux Révolutionnaire**  
-*Basée sur Arch Linux avec une interface moderne inspirée de macOS et Windows*
+## 🌟 Caractéristiques Principales
 
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/JimmyRamsamynaick/ArchFusion-OS/releases)
-[![License](https://img.shields.io/badge/License-GPL%20v3-green.svg)](LICENSE)
-[![Arch Linux](https://img.shields.io/badge/Based%20on-Arch%20Linux-1793d1.svg)](https://archlinux.org/)
-[![KDE Plasma](https://img.shields.io/badge/Desktop-KDE%20Plasma-1d99f3.svg)](https://kde.org/plasma-desktop/)
+### 🎨 Interface Utilisateur Moderne
+- **KDE Plasma** personnalisé avec thème inspiré de macOS/Windows
+- Interface intuitive et élégante
+- Animations fluides et effets visuels modernes
+- Support multi-écrans optimisé
 
-[🚀 Télécharger](#-téléchargement) • [📖 Documentation](#-documentation) • [🛠️ Installation](#️-installation) • [🤝 Contribuer](#-contribuer)
+### ⚡ Performance Optimisée
+- Basé sur **Arch Linux** pour des performances maximales
+- Kernel Linux optimisé
+- Gestion intelligente des ressources
+- Démarrage rapide et réactif
 
-</div>
+### 🛠️ Outils Intégrés
+- **Installateur graphique** simple et intuitif
+- **Scripts d'installation** automatisés
+- **Outils de maintenance** système
+- **Gestionnaire de paquets** AUR intégré
 
----
+### 🔧 Pré-configuration Complète
+- Pilotes matériels automatiquement détectés
+- Codecs multimédia inclus
+- Logiciels essentiels pré-installés
+- Configuration réseau automatique
 
-## 📋 Table des Matières
+## 📋 Configuration Système Requise
 
-- [🎯 À Propos](#-à-propos)
-- [✨ Fonctionnalités](#-fonctionnalités)
-- [🚀 Téléchargement](#-téléchargement)
-- [🛠️ Installation](#️-installation)
-- [📦 Logiciels Inclus](#-logiciels-inclus)
-- [🔧 Configuration Système](#-configuration-système)
-- [👨‍💻 Développement](#-développement)
-- [📖 Documentation](#-documentation)
-- [🤝 Contribuer](#-contribuer)
-- [📞 Support](#-support)
-- [📄 Licence](#-licence)
+### Minimale
+- **Processeur** : x86_64 (64-bit)
+- **RAM** : 2 GB minimum
+- **Stockage** : 20 GB d'espace libre
+- **Carte graphique** : Compatible avec les pilotes open-source
 
----
-
-## 🎯 À Propos
-
-**ArchFusion OS** est une distribution Linux révolutionnaire qui combine la puissance et la flexibilité d'Arch Linux avec une interface utilisateur moderne et intuitive. Conçue pour offrir une expérience utilisateur exceptionnelle, ArchFusion intègre le meilleur des mondes Linux, macOS et Windows.
-
-### 🌟 Philosophie
-
-- **Simplicité** : Installation et utilisation simplifiées
-- **Performance** : Optimisé pour les performances maximales
-- **Modernité** : Interface contemporaine et élégante
-- **Flexibilité** : Personnalisation poussée selon vos besoins
-- **Stabilité** : Basé sur la robustesse d'Arch Linux
-
----
-
-## ✨ Caractéristiques Principales
-
-### 🖥️ Interface Utilisateur
-- **Environnement de bureau** : KDE Plasma personnalisé avec thème hybride macOS/Windows
-- **Barre de menu** en haut à la macOS
-- **Dock élégant** en bas avec animations fluides
-- **Gestes trackpad** intuitifs
-- **Animations** fluides et modernes
-- **Raccourcis clavier** inspirés de macOS
-
-### 🛠️ Technologies Modernes
-- **Base** : Arch Linux (rolling release)
-- **Init System** : systemd
-- **Audio** : PipeWire
-- **Display Server** : Wayland (avec fallback X11)
-- **Gestionnaire de fenêtres** : KWin avec effets personnalisés
-
-### 📦 Logiciels Préinstallés
-- **Navigateur** : Firefox avec extensions utiles
-- **Terminal** : Kitty avec Zsh + Oh My Zsh
-- **Gestionnaire de fichiers** : Dolphin avec previews
-- **Éditeur de texte** : Kate + VS Code
-- **Suite bureautique** : LibreOffice
-- **Multimédia** : VLC, GIMP, Audacity
-
-### ⚙️ Fonctionnalités Système
-- ✅ Support Bluetooth, Wi-Fi, imprimantes
-- ✅ Notifications intégrées élégantes
-- ✅ Fermeture intuitive des fenêtres/onglets
-- ✅ Mise à jour facile via pacman
-- ✅ Scripts de maintenance automatisés
-- ✅ Compatibilité hardware étendue
+### Recommandée
+- **Processeur** : Intel Core i5 / AMD Ryzen 5 ou supérieur
+- **RAM** : 8 GB ou plus
+- **Stockage** : 50 GB d'espace libre (SSD recommandé)
+- **Carte graphique** : Dédiée avec 2 GB VRAM
 
 ## 🚀 Installation Rapide
 
-### Prérequis
-- **RAM** : 4 GB minimum (8 GB recommandé)
-- **Stockage** : 20 GB minimum (50 GB recommandé)
-- **Architecture** : x86_64
-- **UEFI** : Recommandé (BIOS Legacy supporté)
+### 1. Télécharger l'ISO
 
-### Installation Automatisée
 ```bash
-# Télécharger l'ISO
-wget https://github.com/JimmyRamsamynaick/ArchFusion/releases/latest/download/archfusion.iso
+# Télécharger la dernière version
+wget https://github.com/JimmyRamsamynaick/ArchFusion-OS/releases/latest/download/ArchFusion-OS.iso
 
-# Créer une clé USB bootable
-sudo dd if=archfusion.iso of=/dev/sdX bs=4M status=progress
-
-# Booter et suivre l'installateur graphique
+# Vérifier l'intégrité
+sha256sum ArchFusion-OS.iso
 ```
 
-### Installation Manuelle
-```bash
-# Cloner le dépôt
-git clone https://github.com/JimmyRamsamynaick/ArchFusion.git
-cd ArchFusion
+### 2. Créer le Média d'Installation
 
-# Lancer le script d'installation
-sudo ./install.sh
+**Linux/macOS :**
+```bash
+sudo dd if=ArchFusion-OS.iso of=/dev/sdX bs=4M status=progress
 ```
 
-## 📚 Documentation
+**Windows :**
+- Utiliser [Rufus](https://rufus.ie/) ou [Balena Etcher](https://www.balena.io/etcher/)
 
-- 📖 [Guide d'Installation Détaillé](docs/installation.md)
-- 🎨 [Guide de Personnalisation](docs/customization.md)
-- 🔧 [Configuration Avancée](docs/advanced-config.md)
-- ❓ [FAQ et Dépannage](docs/faq.md)
-- 🛠️ [Guide du Développeur](docs/development.md)
+### 3. Démarrer et Installer
 
-## 🏗️ Structure du Projet
+1. Démarrer depuis l'USB/DVD
+2. Sélectionner "Install ArchFusion OS"
+3. Suivre l'assistant d'installation graphique
+4. Redémarrer et profiter !
+
+## 📚 Documentation Complète
+
+### 📖 Guides d'Installation
+- **[Guide d'Installation Détaillé](docs/INSTALLATION.md)** - Instructions complètes étape par étape
+- **[FAQ](docs/FAQ.md)** - Questions fréquemment posées
+- **[Guide de Dépannage](docs/TROUBLESHOOTING.md)** - Solutions aux problèmes courants
+
+### 🔧 Configuration et Personnalisation
+- **[Configuration Post-Installation](docs/POST_INSTALL.md)** - Optimisations recommandées
+- **[Personnalisation du Bureau](docs/DESKTOP_CUSTOMIZATION.md)** - Thèmes et widgets
+- **[Gestion des Logiciels](docs/SOFTWARE_MANAGEMENT.md)** - Pacman et AUR
+
+### 🛠️ Développement
+- **[Guide de Contribution](CONTRIBUTING.md)** - Comment contribuer au projet
+- **[Architecture du Système](docs/ARCHITECTURE.md)** - Structure technique
+- **[Scripts de Build](docs/BUILD.md)** - Compilation de l'ISO
+
+## 🎯 Logiciels Inclus
+
+### 🌐 Internet et Communication
+- **Firefox** - Navigateur web moderne
+- **Thunderbird** - Client email
+- **Discord** - Communication gaming
+- **Telegram** - Messagerie instantanée
+
+### 🎨 Multimédia et Créativité
+- **VLC Media Player** - Lecteur multimédia universel
+- **GIMP** - Édition d'images avancée
+- **Audacity** - Édition audio
+- **OBS Studio** - Streaming et enregistrement
+
+### 💼 Productivité
+- **LibreOffice** - Suite bureautique complète
+- **Visual Studio Code** - Éditeur de code moderne
+- **Konsole** - Terminal avancé
+- **Dolphin** - Gestionnaire de fichiers
+
+### 🎮 Gaming
+- **Steam** - Plateforme de jeux
+- **Lutris** - Gestionnaire de jeux multi-plateformes
+- **Wine** - Compatibilité Windows
+- **GameMode** - Optimisations gaming
+
+### 🔧 Outils Système
+- **Timeshift** - Sauvegarde système
+- **GParted** - Gestionnaire de partitions
+- **htop** - Moniteur système
+- **Neofetch** - Informations système
+
+## 🏗️ Architecture du Projet
 
 ```
 ArchFusion-OS/
-├── 📁 assets/              # Logos, icônes, wallpapers
-├── 📁 configs/             # Configurations système
-│   ├── kde/               # Thèmes et configs KDE
-│   ├── system/            # Configs système (audio, réseau)
-│   └── apps/              # Configurations applications
-├── 📁 scripts/             # Scripts d'installation et maintenance
-│   ├── install.sh         # Script d'installation principal
-│   ├── post-install.sh    # Configuration post-installation
-│   └── maintenance/       # Scripts de maintenance
-├── 📁 packages/            # Listes de paquets
-├── 📁 docs/               # Documentation complète
-├── 📁 iso/                # Outils de génération ISO
-└── 📁 tests/              # Tests et validation
+├── 📁 archiso/                 # Configuration Arch ISO
+│   ├── airootfs/              # Système de fichiers root
+│   ├── efiboot/               # Configuration EFI
+│   └── syslinux/              # Configuration BIOS
+├── 📁 scripts/                # Scripts d'installation
+│   ├── install/               # Installateurs
+│   ├── setup/                 # Configuration système
+│   └── build-iso-macos.sh     # Générateur d'ISO
+├── 📁 configs/                # Fichiers de configuration
+│   ├── kde/                   # Configuration KDE
+│   ├── system/                # Configuration système
+│   └── dotfiles/              # Fichiers de configuration utilisateur
+├── 📁 docs/                   # Documentation
+├── 📁 output/                 # ISO générée et checksums
+└── 📄 README.md               # Ce fichier
+```
+
+## 🔨 Compilation de l'ISO
+
+### Prérequis (Arch Linux)
+```bash
+sudo pacman -S archiso git python3 python-pip
+```
+
+### Prérequis (macOS)
+```bash
+# Installer les dépendances
+brew install cdrtools
+pip3 install -r requirements.txt
+
+# Générer l'ISO
+./scripts/build-iso-macos.sh
+```
+
+### Build Standard
+```bash
+# Cloner le repository
+git clone https://github.com/JimmyRamsamynaick/ArchFusion-OS.git
+cd ArchFusion-OS
+
+# Générer l'ISO
+sudo mkarchiso -v -w work/ -o output/ archiso/
+
+# L'ISO sera disponible dans output/
 ```
 
 ## 🤝 Contribution
 
 Nous accueillons toutes les contributions ! Voici comment participer :
 
-1. **Fork** le projet
-2. **Créer** une branche feature (`git checkout -b feature/AmazingFeature`)
-3. **Commit** vos changements (`git commit -m 'Add some AmazingFeature'`)
-4. **Push** vers la branche (`git push origin feature/AmazingFeature`)
-5. **Ouvrir** une Pull Request
-
 ### 🐛 Signaler un Bug
-Utilisez les [GitHub Issues](https://github.com/JimmyRamsamynaick/ArchFusion/issues) avec le template approprié.
+1. Vérifier les [issues existantes](https://github.com/JimmyRamsamynaick/ArchFusion-OS/issues)
+2. Créer une nouvelle issue avec :
+   - Description détaillée du problème
+   - Étapes pour reproduire
+   - Logs système pertinents
+   - Configuration matérielle
 
 ### 💡 Proposer une Fonctionnalité
-Ouvrez une [Discussion](https://github.com/JimmyRamsamynaick/ArchFusion/discussions) pour discuter de votre idée.
+1. Ouvrir une [discussion](https://github.com/JimmyRamsamynaick/ArchFusion-OS/discussions)
+2. Décrire la fonctionnalité souhaitée
+3. Expliquer les bénéfices utilisateur
+4. Proposer une implémentation
 
-## 🏆 Roadmap
+### 🔧 Contribuer au Code
+1. **Fork** le repository
+2. Créer une branche feature : `git checkout -b feature/ma-fonctionnalite`
+3. **Commit** les changements : `git commit -m 'Ajout de ma fonctionnalité'`
+4. **Push** vers la branche : `git push origin feature/ma-fonctionnalite`
+5. Ouvrir une **Pull Request**
 
-### Version 1.0 (Q2 2025)
-- [x] Interface KDE personnalisée
-- [x] Script d'installation automatisé
-- [x] Documentation complète
-- [ ] ISO de distribution
-- [ ] Tests sur différents hardware
+### 📝 Améliorer la Documentation
+- Corriger les erreurs de frappe
+- Ajouter des exemples
+- Traduire en d'autres langues
+- Créer des tutoriels vidéo
 
-### Version 1.1 (Q3 2025)
-- [ ] Support Wayland complet
-- [ ] Gestionnaire de paquets graphique
-- [ ] Thèmes additionnels
-- [ ] Support ARM64
+## 🌍 Communauté
 
-### Version 2.0 (Q4 2025)
-- [ ] Store d'applications intégré
-- [ ] Synchronisation cloud
-- [ ] Assistant de migration
-- [ ] Support entreprise
+### 💬 Rejoignez-nous
+- **Discord** : [discord.gg/archfusion](https://discord.gg/archfusion)
+- **Forum** : [forum.archfusion.org](https://forum.archfusion.org)
+- **Reddit** : [r/ArchFusionOS](https://reddit.com/r/ArchFusionOS)
+- **Telegram** : [@ArchFusionOS](https://t.me/ArchFusionOS)
 
-## 📊 Statistiques
+### 📢 Suivez-nous
+- **Twitter** : [@ArchFusionOS](https://twitter.com/ArchFusionOS)
+- **YouTube** : [ArchFusion OS Channel](https://youtube.com/ArchFusionOS)
+- **Mastodon** : [@archfusion@fosstodon.org](https://fosstodon.org/@archfusion)
 
-- **⭐ Stars** : ![GitHub stars](https://img.shields.io/github/stars/JimmyRamsamynaick/ArchFusion)
-- **🍴 Forks** : ![GitHub forks](https://img.shields.io/github/forks/JimmyRamsamynaick/ArchFusion)
-- **🐛 Issues** : ![GitHub issues](https://img.shields.io/github/issues/JimmyRamsamynaick/ArchFusion)
-- **📥 Downloads** : ![GitHub downloads](https://img.shields.io/github/downloads/JimmyRamsamynaick/ArchFusion/total)
+## 📊 Statistiques du Projet
 
-## 🙏 Remerciements
-
-- **Arch Linux** pour la base solide
-- **KDE Team** pour Plasma Desktop
-- **Communauté Open Source** pour l'inspiration
-- **Contributeurs** pour leur travail acharné
+![GitHub Stars](https://img.shields.io/github/stars/JimmyRamsamynaick/ArchFusion-OS?style=social)
+![GitHub Forks](https://img.shields.io/github/forks/JimmyRamsamynaick/ArchFusion-OS?style=social)
+![GitHub Issues](https://img.shields.io/github/issues/JimmyRamsamynaick/ArchFusion-OS)
+![GitHub Pull Requests](https://img.shields.io/github/issues-pr/JimmyRamsamynaick/ArchFusion-OS)
 
 ## 📄 Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+Ce projet est sous licence **GPL-3.0**. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-## 📞 Contact
+### 🔓 Liberté Logicielle
+- ✅ Utilisation libre pour tous usages
+- ✅ Modification et redistribution autorisées
+- ✅ Code source toujours disponible
+- ✅ Contributions communautaires encouragées
 
-**Jimmy Ramsamynaick** - [@JimmyRamsamynaick](https://github.com/JimmyRamsamynaick) - jimmyramsamynaick@gmail.com
+## 🙏 Remerciements
 
-**Lien du Projet** : [https://github.com/JimmyRamsamynaick/ArchFusion](https://github.com/JimmyRamsamynaick/ArchFusion)
+### 🏆 Contributeurs Principaux
+- **Jimmy Ramsamynaick** - Créateur et mainteneur principal
+- **Communauté Arch Linux** - Base technique solide
+- **Équipe KDE** - Environnement de bureau moderne
+- **Tous les contributeurs** - Améliorations continues
+
+### 💝 Projets Utilisés
+- [Arch Linux](https://archlinux.org/) - Distribution de base
+- [KDE Plasma](https://kde.org/plasma-desktop/) - Environnement de bureau
+- [ArchISO](https://wiki.archlinux.org/title/Archiso) - Outils de création d'ISO
+- [Tous les logiciels open-source inclus](docs/CREDITS.md)
+
+## 🚀 Roadmap
+
+### Version 1.1 (Q2 2024)
+- [ ] Installateur web moderne
+- [ ] Support Wayland complet
+- [ ] Thèmes additionnels
+- [ ] Optimisations gaming avancées
+
+### Version 1.2 (Q3 2024)
+- [ ] Support ARM64
+- [ ] Containers intégrés
+- [ ] Synchronisation cloud
+- [ ] Assistant IA intégré
+
+### Version 2.0 (Q4 2024)
+- [ ] Nouvelle architecture modulaire
+- [ ] Store d'applications intégré
+- [ ] Système de mise à jour atomique
+- [ ] Interface utilisateur révolutionnaire
 
 ---
 
 <div align="center">
 
+**🌟 Donnez une étoile si vous aimez le projet ! 🌟**
+
 **Fait avec ❤️ par la communauté ArchFusion**
 
-[🌐 Site Web](https://archfusion.org) • [📖 Documentation](https://docs.archfusion.org) • [💬 Discord](https://discord.gg/archfusion) • [🐦 Twitter](https://twitter.com/archfusion)
+[⬆️ Retour en haut](#-archfusion-os)
 
 </div>
