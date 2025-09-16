@@ -4,6 +4,7 @@
 build/
 dist/
 *.iso
+!iso/*.iso
 *.img
 *.tar.xz
 
