@@ -1,0 +1,126 @@
+# Système de base
+base
+base-devel
+linux
+linux-firmware
+linux-headers
+
+# Bootloader et outils système
+grub
+efibootmgr
+os-prober
+mtools
+dosfstools
+ntfs-3g
+
+# Réseau
+networkmanager
+network-manager-applet
+wireless_tools
+wpa_supplicant
+dhcpcd
+openssh
+
+# Audio
+pipewire
+pipewire-alsa
+pipewire-pulse
+pipewire-jack
+wireplumber
+alsa-utils
+pavucontrol
+
+# Pilotes graphiques
+xf86-video-intel
+xf86-video-amdgpu
+xf86-video-nouveau
+xf86-video-vesa
+mesa
+vulkan-intel
+vulkan-radeon
+
+# Environnement de bureau KDE
+plasma-meta
+kde-applications-meta
+sddm
+konsole
+dolphin
+kate
+firefox
+ark
+spectacle
+gwenview
+okular
+
+# Outils essentiels
+git
+vim
+nano
+htop
+neofetch
+tree
+wget
+curl
+unzip
+zip
+rsync
+gparted
+timeshift
+
+# Développement
+python
+python-pip
+nodejs
+npm
+
+# Multimédia
+vlc
+gimp
+audacity
+obs-studio
+
+# Gaming (préparation pour optimisations futures)
+steam
+lutris
+wine
+gamemode
+
+# Virtualisation (base pour containers futurs)
+docker
+docker-compose
+qemu-full
+virt-manager
+
+# Outils de diagnostic
+smartmontools
+lm_sensors
+iotop
+nmap
+traceroute
+
+# Compression et archives
+p7zip
+unrar
+lzop
+lrzip
+
+# Fonts
+ttf-dejavu
+ttf-liberation
+noto-fonts
+noto-fonts-emoji
+
+# Bluetooth
+bluez
+bluez-utils
+blueman
+
+# Impression
+cups
+cups-pdf
+system-config-printer
+
+# Sécurité
+ufw
+clamav
+fail2ban

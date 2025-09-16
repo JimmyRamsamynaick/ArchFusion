@@ -1,0 +1,14 @@
+[Unit]
+Description=ArchFusion OS Setup Service
+After=multi-user.target graphical-session.target
+Wants=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/archfusion-setup.sh
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

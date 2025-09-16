@@ -1,0 +1,112 @@
+#!/bin/bash
+
+# Script d'aide ArchFusion OS
+
+clear
+
+cat << 'EOF'
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                          📚 AIDE ARCHFUSION OS 📚                            ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+🔧 COMMANDES PRINCIPALES:
+├─ archfusion-install      : Lance l'installateur graphique
+├─ archfusion-config       : Ouvre le centre de configuration
+├─ archfusion-gaming       : Optimisations et outils gaming
+├─ archfusion-themes       : Gestionnaire de thèmes
+├─ archfusion-update       : Met à jour le système
+├─ archfusion-clean        : Nettoie les paquets orphelins
+├─ archfusion-info         : Affiche les informations système
+└─ archfusion-help         : Affiche cette aide
+
+🎮 GAMING:
+├─ Steam                   : Plateforme de jeux (steam)
+├─ Lutris                  : Gestionnaire de jeux (lutris)
+├─ GameMode                : Optimisations gaming automatiques
+├─ Wine                    : Émulateur Windows pour les jeux
+└─ MangoHud                : Overlay de performance (mangohud)
+
+🎨 MULTIMÉDIA:
+├─ GIMP                    : Édition d'images (gimp)
+├─ VLC                     : Lecteur multimédia (vlc)
+├─ OBS Studio              : Streaming et enregistrement (obs)
+├─ Audacity                : Édition audio (audacity)
+└─ Spectacle               : Captures d'écran (spectacle)
+
+💻 DÉVELOPPEMENT:
+├─ Git                     : Contrôle de version (git)
+├─ Python                  : Langage de programmation (python)
+├─ Node.js                 : Runtime JavaScript (node, npm)
+├─ Docker                  : Conteneurisation (docker, docker-compose)
+├─ Kate                    : Éditeur de code (kate)
+└─ Konsole                 : Terminal avancé (konsole)
+
+🔧 OUTILS SYSTÈME:
+├─ Dolphin                 : Gestionnaire de fichiers (dolphin)
+├─ GParted                 : Gestionnaire de partitions (gparted)
+├─ Timeshift               : Sauvegardes système (timeshift)
+├─ htop                    : Moniteur système (htop)
+├─ neofetch                : Informations système (neofetch)
+└─ Firefox                 : Navigateur web (firefox)
+
+🌐 RÉSEAU:
+├─ NetworkManager          : Gestion réseau automatique
+├─ SSH                     : Connexions sécurisées (ssh)
+├─ UFW                     : Pare-feu simplifié
+└─ nmap                    : Scanner réseau (nmap)
+
+🔒 SÉCURITÉ:
+├─ ClamAV                  : Antivirus (clamscan)
+├─ Fail2Ban                : Protection contre les intrusions
+├─ UFW                     : Pare-feu configuré par défaut
+└─ GnuPG                   : Chiffrement (gpg)
+
+📁 RACCOURCIS CLAVIER KDE:
+├─ Meta + T                : Ouvrir le terminal
+├─ Meta + E                : Ouvrir le gestionnaire de fichiers
+├─ Meta + R                : Lanceur d'applications
+├─ Alt + F2                : Commande rapide
+├─ Ctrl + Alt + L          : Verrouiller l'écran
+├─ Print                   : Capture d'écran
+└─ Meta + Tab              : Changeur d'applications
+
+🚀 OPTIMISATIONS INCLUSES:
+├─ Scheduler SSD optimisé (mq-deadline)
+├─ Swappiness réduite (10)
+├─ Cache VFS optimisé (50)
+├─ TCP BBR pour le réseau
+├─ GameMode pour les jeux
+└─ PipeWire pour l'audio haute qualité
+
+📚 DOCUMENTATION:
+├─ Manuel local            : /usr/share/doc/archfusion/
+├─ Wiki Arch Linux         : https://wiki.archlinux.org/
+├─ Documentation KDE       : https://docs.kde.org/
+└─ Site ArchFusion         : https://archfusion.org
+
+💡 CONSEILS:
+├─ Utilisez 'yay' pour installer des paquets AUR
+├─ 'systemctl --user' pour les services utilisateur
+├─ 'journalctl -f' pour voir les logs en temps réel
+├─ 'lsblk' pour voir les disques et partitions
+└─ 'ip a' pour voir la configuration réseau
+
+🆘 SUPPORT:
+├─ GitHub Issues           : https://github.com/archfusion/support
+├─ Discord                 : https://discord.gg/archfusion
+├─ Forum                   : https://forum.archfusion.org
+└─ Email                   : support@archfusion.org
+
+⚠️  IMPORTANT:
+Vous êtes actuellement sur le système live. Toutes les modifications
+seront perdues au redémarrage. Utilisez 'archfusion-install' pour
+installer ArchFusion OS de façon permanente sur votre disque dur.
+
+EOF
+
+echo ""
+echo "🔍 Pour plus d'informations sur une commande spécifique:"
+echo "   man <commande>  ou  <commande> --help"
+echo ""
+echo "🎯 Tapez 'archfusion-info' pour voir les informations système"
+echo ""
