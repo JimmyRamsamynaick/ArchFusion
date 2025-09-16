@@ -1,24 +1,52 @@
-# 🚀 ArchFusion OS
+# 🔥 ArchFusion OS
 
 <div align="center">
 
-![ArchFusion Logo](assets/logo.svg)
+![ArchFusion Logo](assets/logo.png)
 
-**Une distribution ArchLinux personnalisée alliant l'élégance de macOS, la fonctionnalité de Windows et la puissance d'Arch Linux**
+**Distribution Linux Révolutionnaire**  
+*Basée sur Arch Linux avec une interface moderne inspirée de macOS et Windows*
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Arch Linux](https://img.shields.io/badge/Based%20on-Arch%20Linux-1793D1?logo=arch-linux)](https://archlinux.org/)
-[![Desktop Environment](https://img.shields.io/badge/DE-KDE%20Plasma-1D99F3?logo=kde)](https://kde.org/plasma-desktop/)
-[![Build Status](https://img.shields.io/badge/Build-Stable-success)](https://github.com/JimmyRamsamynaick/ArchFusion)
+[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/JimmyRamsamynaick/ArchFusion-OS/releases)
+[![License](https://img.shields.io/badge/License-GPL%20v3-green.svg)](LICENSE)
+[![Arch Linux](https://img.shields.io/badge/Based%20on-Arch%20Linux-1793d1.svg)](https://archlinux.org/)
+[![KDE Plasma](https://img.shields.io/badge/Desktop-KDE%20Plasma-1d99f3.svg)](https://kde.org/plasma-desktop/)
+
+[🚀 Télécharger](#-téléchargement) • [📖 Documentation](#-documentation) • [🛠️ Installation](#️-installation) • [🤝 Contribuer](#-contribuer)
 
 </div>
 
-## 🎯 Vision
+---
 
-ArchFusion OS est une distribution Linux révolutionnaire qui fusionne le meilleur de trois mondes :
-- **🍎 macOS** : Ergonomie, gestion des fenêtres, cohérence visuelle
-- **🪟 Windows** : Compatibilité logicielle, navigation intuitive
-- **🏛️ Arch Linux** : Rolling release, minimalisme, personnalisation extrême
+## 📋 Table des Matières
+
+- [🎯 À Propos](#-à-propos)
+- [✨ Fonctionnalités](#-fonctionnalités)
+- [🚀 Téléchargement](#-téléchargement)
+- [🛠️ Installation](#️-installation)
+- [📦 Logiciels Inclus](#-logiciels-inclus)
+- [🔧 Configuration Système](#-configuration-système)
+- [👨‍💻 Développement](#-développement)
+- [📖 Documentation](#-documentation)
+- [🤝 Contribuer](#-contribuer)
+- [📞 Support](#-support)
+- [📄 Licence](#-licence)
+
+---
+
+## 🎯 À Propos
+
+**ArchFusion OS** est une distribution Linux révolutionnaire qui combine la puissance et la flexibilité d'Arch Linux avec une interface utilisateur moderne et intuitive. Conçue pour offrir une expérience utilisateur exceptionnelle, ArchFusion intègre le meilleur des mondes Linux, macOS et Windows.
+
+### 🌟 Philosophie
+
+- **Simplicité** : Installation et utilisation simplifiées
+- **Performance** : Optimisé pour les performances maximales
+- **Modernité** : Interface contemporaine et élégante
+- **Flexibilité** : Personnalisation poussée selon vos besoins
+- **Stabilité** : Basé sur la robustesse d'Arch Linux
+
+---
 
 ## ✨ Caractéristiques Principales
 
