@@ -8,9 +8,10 @@ Ce guide détaille l'installation complète d'ArchFusion OS sur une machine virt
 2. [Téléchargement de l'ISO](#téléchargement-de-liso)
 3. [Configuration VirtualBox](#configuration-virtualbox)
 4. [Configuration VMware Workstation](#configuration-vmware-workstation)
-5. [Installation d'ArchFusion OS](#installation-darchfusion-os)
-6. [Optimisations post-installation](#optimisations-post-installation)
-7. [Dépannage](#dépannage)
+5. [Configuration Hyper-V](#configuration-hyper-v)
+6. [Installation d'ArchFusion OS](#installation-darchfusion-os)
+7. [Optimisations post-installation](#optimisations-post-installation)
+8. [Dépannage](#dépannage)
 
 ---
 
@@ -188,6 +189,160 @@ Options → Général
 
 ---
 
+## 🟢 Configuration Hyper-V
+
+### Prérequis Hyper-V
+
+#### Vérification de la compatibilité
+```powershell
+# Ouvrir PowerShell en tant qu'administrateur
+# Vérifier si Hyper-V est supporté
+systeminfo | findstr /i hyper
+
+# Vérifier les fonctionnalités de virtualisation
+Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All
+```
+
+#### Activation d'Hyper-V
+```powershell
+# Méthode 1: Via PowerShell (Administrateur)
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+
+# Méthode 2: Via les fonctionnalités Windows
+# Panneau de configuration → Programmes → Activer/désactiver des fonctionnalités Windows
+# ✅ Hyper-V (cocher toutes les sous-options)
+```
+
+**⚠️ Redémarrage requis après activation**
+
+### Étape 1: Création de la machine virtuelle
+
+1. **Ouvrir le Gestionnaire Hyper-V**
+   ```
+   Démarrer → Gestionnaire Hyper-V
+   ou
+   Windows + R → virtmgmt.msc
+   ```
+
+2. **Créer une nouvelle VM**
+   ```
+   Actions → Nouveau → Ordinateur virtuel...
+   ```
+
+3. **Assistant de création:**
+   ```
+   Nom: ArchFusion-OS
+   Emplacement: C:\VMs\ArchFusion-OS\
+   Génération: Génération 2 (UEFI)
+   ```
+
+### Étape 2: Configuration de base
+
+#### A. Allocation mémoire
+```
+Mémoire de démarrage: 4096 MB (4 GB)
+✅ Utiliser la mémoire dynamique
+Mémoire minimale: 2048 MB
+Mémoire maximale: 8192 MB
+```
+
+#### B. Configuration réseau
+```
+Connexion: Commutateur par défaut
+ou
+Créer un commutateur virtuel externe
+```
+
+#### C. Disque dur virtuel
+```
+Créer un disque dur virtuel
+Nom: ArchFusion-OS.vhdx
+Emplacement: C:\VMs\ArchFusion-OS\
+Taille: 40 GB (extension dynamique)
+```
+
+### Étape 3: Configuration avancée
+
+#### A. Paramètres du processeur
+```
+Paramètres VM → Processeur
+- Nombre de processeurs virtuels: 4
+- ✅ Activer la virtualisation imbriquée (si supportée)
+```
+
+#### B. Paramètres de sécurité
+```
+Paramètres VM → Sécurité
+- ✅ Activer le démarrage sécurisé
+- Modèle: Microsoft UEFI Certificate Authority
+- ✅ Activer le module de plateforme sécurisée (TPM)
+```
+
+#### C. Configuration du firmware
+```
+Paramètres VM → Firmware
+- Ordre de démarrage:
+  1. Lecteur de DVD
+  2. Disque dur
+- ✅ Activer le démarrage sécurisé
+```
+
+### Étape 4: Montage de l'ISO
+
+```
+Paramètres VM → Lecteur de DVD
+- ✅ Fichier image (.iso)
+- Parcourir → Sélectionner ArchFusion-OS.iso
+```
+
+### Étape 5: Optimisations Hyper-V
+
+#### A. Services d'intégration
+```
+Paramètres VM → Services d'intégration
+- ✅ Arrêt du système d'exploitation invité
+- ✅ Échange de données
+- ✅ Pulsations
+- ✅ Sauvegarde (instantané VSS)
+- ✅ Synchronisation de l'heure
+```
+
+#### B. Points de contrôle
+```
+Paramètres VM → Gestion des points de contrôle
+- Type: Points de contrôle de production
+- ✅ Activer les points de contrôle automatiques
+```
+
+#### C. Mémoire dynamique (Recommandé)
+```
+Paramètres VM → Mémoire
+- ✅ Activer la mémoire dynamique
+- RAM de démarrage: 4096 MB
+- RAM minimale: 2048 MB
+- RAM maximale: 8192 MB
+- Mémoire tampon: 20%
+- Priorité de mémoire: Normale
+```
+
+### Étape 6: Configuration réseau avancée
+
+#### Création d'un commutateur virtuel externe
+```powershell
+# PowerShell Administrateur
+New-VMSwitch -Name "External-Switch" -NetAdapterName "Ethernet" -AllowManagementOS $true
+```
+
+#### Configuration de la carte réseau VM
+```
+Paramètres VM → Carte réseau
+- Commutateur virtuel: External-Switch
+- ✅ Activer la mise en forme de bande passante
+- ✅ Activer l'usurpation d'adresse MAC
+```
+
+---
+
 ## 🚀 Installation d'ArchFusion OS
 
 ### Étape 1: Démarrage depuis l'ISO
@@ -298,6 +453,28 @@ sudo systemctl enable vmware-vmblock-fuse
 sudo reboot
 ```
 
+#### Hyper-V Integration Services
+```bash
+# Les services d'intégration Hyper-V sont généralement inclus dans le noyau Linux moderne
+# Vérifier les services disponibles
+lsmod | grep hv_
+
+# Installer les outils Hyper-V (si nécessaire)
+sudo pacman -S hyperv
+
+# Services d'intégration automatiques
+sudo systemctl enable hv_fcopy_daemon
+sudo systemctl enable hv_kvp_daemon
+sudo systemctl enable hv_vss_daemon
+
+# Redémarrer pour activer tous les services
+sudo reboot
+```
+sudo systemctl enable vmtoolsd
+sudo systemctl enable vmware-vmblock-fuse
+sudo reboot
+```
+
 ### Optimisations système
 
 #### 1. Mise à jour complète
@@ -392,6 +569,36 @@ Paramètres → Audio → Contrôleur audio: Intel HD Audio
 
 # VMware:
 VM Settings → Hardware → Sound Card → Auto detect
+
+# Hyper-V:
+# L'audio nécessite une configuration spéciale via RDP
+# Activer l'audio dans les paramètres de connexion Bureau à distance
+```
+
+#### 5. Problèmes spécifiques Hyper-V
+
+##### Démarrage sécurisé
+```bash
+# Si la VM ne démarre pas avec Secure Boot
+# Désactiver temporairement le démarrage sécurisé:
+Paramètres VM → Sécurité → Décocher "Activer le démarrage sécurisé"
+```
+
+##### Performance graphique
+```bash
+# Hyper-V utilise RemoteFX (déprécié) ou Enhanced Session Mode
+# Activer Enhanced Session Mode:
+Set-VMHost -EnableEnhancedSessionMode $true
+
+# Pour la VM spécifique:
+Set-VM -VMName "ArchFusion-OS" -EnhancedSessionTransportType HvSocket
+```
+
+##### Résolution d'écran
+```bash
+# Configurer la résolution via les paramètres d'affichage Linux
+# ou via xrandr pour les environnements X11
+xrandr --output Virtual1 --mode 1920x1080
 ```
 
 ### Logs de débogage
@@ -405,6 +612,10 @@ sudo journalctl -u vboxservice
 
 # Logs spécifiques VMware
 sudo journalctl -u vmtoolsd
+
+# Logs spécifiques Hyper-V
+sudo journalctl | grep hv_
+dmesg | grep -i hyper
 ```
 
 ---
