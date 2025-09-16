@@ -1,0 +1,57 @@
+# ArchFusion OS - Dépendances Python pour l'Installateur Graphique
+# Auteur: Jimmy Ramsamynaick
+# Version: 1.0.0
+
+# Interface graphique
+PyQt5>=5.15.0
+PyQt5-tools>=5.15.0
+
+# Utilitaires système
+psutil>=5.8.0
+distro>=1.6.0
+
+# Gestion des processus
+subprocess32>=3.5.4; python_version < '3.0'
+
+# Logging avancé
+colorlog>=6.6.0
+
+# Configuration
+configparser>=5.2.0
+pyyaml>=6.0
+
+# Validation des données
+jsonschema>=4.4.0
+
+# Utilitaires de fichiers
+pathlib2>=2.3.6; python_version < '3.4'
+
+# Détection du matériel
+py-cpuinfo>=8.0.0
+
+# Gestion des partitions (optionnel, nécessite des privilèges root)
+# python-parted>=3.11.0
+
+# Interface en ligne de commande améliorée
+click>=8.0.0
+rich>=12.0.0
+
+# Gestion des erreurs et debugging
+sentry-sdk>=1.5.0
+
+# Tests (pour le développement)
+pytest>=7.0.0
+pytest-qt>=4.0.0
+pytest-cov>=3.0.0
+
+# Documentation (pour le développement)
+sphinx>=4.5.0
+sphinx-rtd-theme>=1.0.0
+
+# Formatage du code (pour le développement)
+black>=22.0.0
+isort>=5.10.0
+flake8>=4.0.0
+
+# Type checking (pour le développement)
+mypy>=0.950
