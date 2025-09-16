@@ -175,6 +175,23 @@ sudo mkarchiso -v -w work/ -o output/ archiso/
 # L'ISO sera disponible dans output/
 ```
 
+## 🚀 Génération d'ISO
+
+### Script Principal
+```bash
+# Générer une ISO bootable avec vrais bootloaders
+./create-real-bootable-iso.sh
+```
+
+### Compatibilité
+- ✅ **Hyper-V Generation 2** (UEFI)
+- ✅ **VirtualBox** (BIOS + UEFI)
+- ✅ **VMware** (BIOS + UEFI)
+- ✅ **QEMU** (BIOS + UEFI)
+
+### Résolution de Problèmes
+Consultez le [Guide de Diagnostic Hyper-V](HYPER-V-TROUBLESHOOTING.md) pour résoudre les problèmes de boot.
+
 ## 🤝 Contribution
 
 Nous accueillons toutes les contributions ! Voici comment participer :
