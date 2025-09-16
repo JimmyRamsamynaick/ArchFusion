@@ -104,33 +104,94 @@ copy_system_files() {
 create_boot_files() {
     log "🚀 Création des fichiers de boot..."
     
-    # Créer le fichier de boot GRUB
-    cat > "$TEMP_DIR/boot/grub.cfg" << 'EOF'
+    # Créer les répertoires de boot nécessaires
+    mkdir -p "$TEMP_DIR"/{boot/{grub,syslinux},EFI/BOOT}
+    
+    # Créer un kernel et initramfs factices pour le test
+    log "📦 Création des fichiers système de base..."
+    
+    # Créer un kernel factice (pour test uniquement)
+    dd if=/dev/zero of="$TEMP_DIR/boot/vmlinuz-linux" bs=1024 count=1024 2>/dev/null
+    
+    # Créer un initramfs factice (pour test uniquement)  
+    dd if=/dev/zero of="$TEMP_DIR/boot/initramfs-linux.img" bs=1024 count=2048 2>/dev/null
+    
+    # Configuration GRUB pour UEFI
+    cat > "$TEMP_DIR/boot/grub/grub.cfg" << 'EOF'
 set timeout=10
 set default=0
 
+insmod part_gpt
+insmod part_msdos
+insmod fat
+insmod iso9660
+insmod all_video
+insmod gfxterm
+
+set gfxmode=auto
+terminal_output gfxterm
+
 menuentry "ArchFusion OS - Installation" {
-    linux /archfusion/boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION
-    initrd /archfusion/boot/initramfs-linux.img
+    set gfxpayload=keep
+    linux /boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION quiet splash
+    initrd /boot/initramfs-linux.img
 }
 
 menuentry "ArchFusion OS - Mode Live" {
-    linux /archfusion/boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION archiso_cow_spacesize=1G
-    initrd /archfusion/boot/initramfs-linux.img
+    set gfxpayload=keep
+    linux /boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION archiso_cow_spacesize=1G quiet splash
+    initrd /boot/initramfs-linux.img
 }
 
-menuentry "Outils de Diagnostic" {
-    linux /archfusion/boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION memtest
-    initrd /archfusion/boot/initramfs-linux.img
+menuentry "ArchFusion OS - Mode Sans Échec" {
+    set gfxpayload=text
+    linux /boot/vmlinuz-linux archisobasedir=archfusion archisolabel=ARCHFUSION nomodeset
+    initrd /boot/initramfs-linux.img
 }
 EOF
 
-    # Créer le fichier de boot UEFI
+    # Configuration Syslinux pour BIOS
+    cat > "$TEMP_DIR/boot/syslinux/syslinux.cfg" << 'EOF'
+DEFAULT archfusion
+TIMEOUT 100
+PROMPT 1
+
+LABEL archfusion
+    MENU LABEL ArchFusion OS - Installation
+    KERNEL /boot/vmlinuz-linux
+    APPEND initrd=/boot/initramfs-linux.img archisobasedir=archfusion archisolabel=ARCHFUSION quiet splash
+
+LABEL live
+    MENU LABEL ArchFusion OS - Mode Live  
+    KERNEL /boot/vmlinuz-linux
+    APPEND initrd=/boot/initramfs-linux.img archisobasedir=archfusion archisolabel=ARCHFUSION archiso_cow_spacesize=1G quiet splash
+
+LABEL safe
+    MENU LABEL ArchFusion OS - Mode Sans Échec
+    KERNEL /boot/vmlinuz-linux
+    APPEND initrd=/boot/initramfs-linux.img archisobasedir=archfusion archisolabel=ARCHFUSION nomodeset
+EOF
+
+    # Créer un bootloader UEFI factice (normalement ce serait grubx64.efi)
+    log "🔧 Création du bootloader UEFI..."
+    
+    # Créer un fichier EFI factice pour le test
+    cat > "$TEMP_DIR/EFI/BOOT/BOOTX64.EFI" << 'EOF'
+# Fichier EFI factice - Dans un vrai ISO, ce serait le bootloader GRUB compilé
+# Pour un ISO fonctionnel, il faudrait utiliser grub-mkstandalone ou archiso
+EOF
+
+    # Script de démarrage UEFI
     cat > "$TEMP_DIR/EFI/BOOT/startup.nsh" << 'EOF'
 @echo -off
-echo "Démarrage d'ArchFusion OS..."
+echo "==================================="
+echo "    ArchFusion OS - Démarrage UEFI"
+echo "==================================="
+echo ""
 echo "Chargement du système..."
-\archfusion\boot\bootx64.efi
+echo "Veuillez patienter..."
+echo ""
+\EFI\BOOT\BOOTX64.EFI
 EOF
 
     success "✅ Fichiers de boot créés"
@@ -142,11 +203,20 @@ create_iso() {
     
     local iso_path="$OUTPUT_DIR/$ISO_NAME"
     
-    # Utiliser mkisofs pour créer l'ISO (version simplifiée compatible macOS)
+    # Utiliser mkisofs avec support UEFI et BIOS
     if command -v mkisofs &> /dev/null; then
         mkisofs -o "$iso_path" \
                 -V "$ISO_LABEL" \
                 -J -R -v \
+                -b boot/syslinux/isolinux.bin \
+                -c boot/syslinux/boot.cat \
+                -no-emul-boot \
+                -boot-load-size 4 \
+                -boot-info-table \
+                -eltorito-alt-boot \
+                -e EFI/BOOT/efiboot.img \
+                -no-emul-boot \
+                -isohybrid-gpt-basdat \
                 "$TEMP_DIR"
     else
         error "Impossible de créer l'ISO - mkisofs non disponible"
