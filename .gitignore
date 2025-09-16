@@ -1,0 +1,116 @@
+# ArchFusion OS - .gitignore
+
+# Build artifacts
+build/
+dist/
+*.iso
+*.img
+*.tar.xz
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+*.cache
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Package manager files
+node_modules/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+
+# Configuration files with sensitive data
+*.key
+*.pem
+*.p12
+secrets.conf
+private.conf
+
+# Test files
+test-results/
+coverage/
+*.coverage
+
+# Documentation build
+docs/_build/
+docs/site/
+
+# Virtual environments
+venv/
+env/
+.env
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Compressed files (except assets)
+*.zip
+*.tar.gz
+*.rar
+!assets/*.zip
+!assets/*.tar.gz
+
+# System files
+lost+found/
+.fuse_hidden*
+
+# Development databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs/
+*.log.*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output/
+
+# Dependency directories
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn Integrity file
+.yarn-integrity
+
+# dotenv environment variables file
+.env
+.env.test
+.env.production
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
