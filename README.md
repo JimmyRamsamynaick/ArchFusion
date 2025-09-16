@@ -79,6 +79,7 @@ sudo dd if=ArchFusion-OS.iso of=/dev/sdX bs=4M status=progress
 
 ### 📖 Guides d'Installation
 - **[Guide d'Installation Détaillé](docs/INSTALLATION.md)** - Instructions complètes étape par étape
+- **[🖥️ Installation sur Machine Virtuelle](docs/INSTALLATION_VM.md)** - **Guide complet VM**
 - **[FAQ](docs/FAQ.md)** - Questions fréquemment posées
 - **[Guide de Dépannage](docs/TROUBLESHOOTING.md)** - Solutions aux problèmes courants
 
