@@ -147,7 +147,7 @@ show_info() {
     echo ""
     echo "📁 ISO générée: $OUTPUT_DIR/$ISO_NAME"
     echo "📊 Taille: $(du -h "$OUTPUT_DIR/$ISO_NAME" | cut -f1)"
-    echo "🔍 Checksum MD5: $(md5sum "$OUTPUT_DIR/$ISO_NAME" | cut -d' ' -f1)"
+    echo "🔍 Checksum MD5: $(if command -v md5sum >/dev/null 2>&1; then md5sum "$OUTPUT_DIR/$ISO_NAME" | cut -d' ' -f1; elif command -v md5 >/dev/null 2>&1; then md5 "$OUTPUT_DIR/$ISO_NAME" | cut -d' ' -f4; else echo "Non disponible"; fi)"
     echo ""
     echo "🚀 Pour tester l'ISO:"
     echo "   qemu-system-x86_64 -m 2048 -cdrom \"$OUTPUT_DIR/$ISO_NAME\""

@@ -236,7 +236,15 @@ create_checksums() {
     shasum -a 256 "$iso_path" > "$iso_path.sha256"
     
     # MD5
+if command -v md5sum >/dev/null 2>&1; then
+    # Linux/ArchLinux
+    md5sum "$iso_path" > "$iso_path.md5"
+elif command -v md5 >/dev/null 2>&1; then
+    # macOS
     md5 "$iso_path" | sed 's/MD5 (//' | sed 's/) = / /' > "$iso_path.md5"
+else
+    echo "⚠️ Aucune commande MD5 trouvée, checksum MD5 ignoré"
+fi
     
     success "✅ Checksums créés"
     echo "📍 SHA256: $(cat "$iso_path.sha256")"

@@ -104,7 +104,15 @@ generate_checksums() {
     shasum -a 256 "$iso_name" > "${iso_name}.sha256"
     
     # MD5
-    md5 "$iso_name" | sed "s/MD5 (\(.*\)) = \(.*\)/\2  \1/" > "${iso_name}.md5"
+    if command -v md5sum >/dev/null 2>&1; then
+        # Linux/ArchLinux
+        md5sum "$iso_name" > "${iso_name}.md5"
+    elif command -v md5 >/dev/null 2>&1; then
+        # macOS
+        md5 "$iso_name" | sed "s/MD5 (\(.*\)) = \(.*\)/\2  \1/" > "${iso_name}.md5"
+    else
+        warning "⚠️ Aucune commande MD5 trouvée, checksum MD5 ignoré"
+    fi
     
     success "✅ Checksums générés"
 }

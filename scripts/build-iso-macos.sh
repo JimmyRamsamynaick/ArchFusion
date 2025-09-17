@@ -200,7 +200,15 @@ calculate_checksums() {
         shasum -a 256 "$ISO_NAME" > "${ISO_NAME}.sha256"
         
         # MD5
-        md5 "$ISO_NAME" > "${ISO_NAME}.md5"
+if command -v md5sum >/dev/null 2>&1; then
+    # Linux/ArchLinux
+    md5sum "$ISO_NAME" > "${ISO_NAME}.md5"
+elif command -v md5 >/dev/null 2>&1; then
+    # macOS
+    md5 "$ISO_NAME" > "${ISO_NAME}.md5"
+else
+    echo "⚠️ Aucune commande MD5 trouvée, checksum MD5 ignoré"
+fi
         
         success "✅ Checksums calculés"
         
