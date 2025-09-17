@@ -4,6 +4,8 @@ base-devel
 linux
 linux-firmware
 linux-headers
+linux-lts
+linux-lts-headers
 
 # Bootloader et outils système
 grub
@@ -12,6 +14,21 @@ os-prober
 mtools
 dosfstools
 ntfs-3g
+syslinux
+refind
+
+# Modules kernel essentiels
+dkms
+linux-api-headers
+
+# Support matériel étendu
+usbutils
+pciutils
+dmidecode
+lshw
+hwinfo
+acpi
+acpid
 
 # Réseau
 networkmanager
@@ -30,14 +47,46 @@ wireplumber
 alsa-utils
 pavucontrol
 
-# Pilotes graphiques
+# Pilotes graphiques étendus
 xf86-video-intel
 xf86-video-amdgpu
 xf86-video-nouveau
 xf86-video-vesa
+xf86-video-ati
+xf86-video-fbdev
 mesa
+mesa-utils
 vulkan-intel
 vulkan-radeon
+vulkan-mesa-layers
+lib32-mesa
+lib32-vulkan-intel
+lib32-vulkan-radeon
+
+# Pilotes réseau étendus
+broadcom-wl
+rtl8821cu-morrownr-dkms-git
+iwlwifi-firmware
+linux-firmware-qlogic
+b43-fwcutter
+
+# Pilotes audio étendus
+sof-firmware
+alsa-firmware
+pulseaudio-alsa
+lib32-alsa-plugins
+
+# Support Bluetooth
+bluez
+bluez-utils
+pulseaudio-bluetooth
+
+# Pilotes imprimantes
+cups
+cups-pdf
+gutenprint
+hplip
+system-config-printer
 
 # Environnement de bureau KDE
 plasma-meta

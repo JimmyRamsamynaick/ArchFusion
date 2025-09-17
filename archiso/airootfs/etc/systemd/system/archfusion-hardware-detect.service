@@ -1,0 +1,15 @@
+[Unit]
+Description=ArchFusion Hardware Detection and Driver Loading
+After=systemd-udev-settle.service
+Before=display-manager.service
+Wants=systemd-udev-settle.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/archfusion-hardware-detect
+RemainAfterExit=yes
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

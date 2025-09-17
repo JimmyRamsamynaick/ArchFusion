@@ -1,0 +1,226 @@
+#!/bin/bash
+
+# ArchFusion OS - Détection et chargement automatique des pilotes
+# Script exécuté au démarrage pour assurer la compatibilité matérielle
+
+set -euo pipefail
+
+LOG_FILE="/var/log/archfusion-hardware-detect.log"
+
+log() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
+}
+
+error() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: $1" | tee -a "$LOG_FILE" >&2
+}
+
+# Détection du GPU et chargement des pilotes appropriés
+detect_gpu() {
+    log "🎮 Détection GPU..."
+    
+    # Intel
+    if lspci | grep -i "intel.*graphics\|intel.*display" > /dev/null; then
+        log "GPU Intel détecté"
+        modprobe i915 || true
+        modprobe intel_agp || true
+    fi
+    
+    # NVIDIA
+    if lspci | grep -i nvidia > /dev/null; then
+        log "GPU NVIDIA détecté"
+        modprobe nouveau || true
+        # Note: nvidia propriétaire nécessiterait une installation séparée
+    fi
+    
+    # AMD
+    if lspci | grep -i "amd\|ati\|radeon" > /dev/null; then
+        log "GPU AMD/ATI détecté"
+        modprobe amdgpu || true
+        modprobe radeon || true
+    fi
+    
+    # Virtualisation
+    if lspci | grep -i "vmware\|virtualbox\|qemu\|bochs\|cirrus" > /dev/null; then
+        log "GPU virtualisé détecté"
+        modprobe bochs_drm || true
+        modprobe cirrus || true
+        modprobe qxl || true
+        modprobe vmwgfx || true
+    fi
+}
+
+# Détection réseau
+detect_network() {
+    log "🌐 Détection réseau..."
+    
+    # Ethernet communs
+    for driver in e1000e r8169 igb ixgbe tg3 bnx2 sky2; do
+        if lspci | grep -i ethernet > /dev/null; then
+            modprobe "$driver" 2>/dev/null || true
+        fi
+    done
+    
+    # WiFi communs
+    for driver in iwlwifi ath9k ath10k_pci rtl8192ce rtl8188eu; do
+        if lspci | grep -i "wireless\|wifi\|802.11" > /dev/null; then
+            modprobe "$driver" 2>/dev/null || true
+        fi
+    done
+    
+    # Virtualisation réseau
+    if systemd-detect-virt > /dev/null 2>&1; then
+        modprobe virtio_net || true
+        modprobe vmxnet3 || true
+        modprobe hv_netvsc || true
+    fi
+}
+
+# Détection audio
+detect_audio() {
+    log "🔊 Détection audio..."
+    
+    modprobe snd_hda_intel || true
+    modprobe snd_hda_codec_realtek || true
+    modprobe snd_hda_codec_hdmi || true
+    modprobe snd_ac97_codec || true
+    
+    # Audio virtualisation
+    if systemd-detect-virt > /dev/null 2>&1; then
+        modprobe snd_intel8x0 || true
+        modprobe snd_ens1371 || true
+    fi
+}
+
+# Détection stockage
+detect_storage() {
+    log "💾 Détection stockage..."
+    
+    # SATA/AHCI
+    modprobe ahci || true
+    modprobe ata_piix || true
+    
+    # NVMe
+    modprobe nvme || true
+    
+    # USB Storage
+    modprobe usb_storage || true
+    modprobe uas || true
+    
+    # Virtualisation stockage
+    if systemd-detect-virt > /dev/null 2>&1; then
+        modprobe virtio_blk || true
+        modprobe virtio_scsi || true
+        modprobe hv_storvsc || true
+        modprobe vmw_pvscsi || true
+    fi
+}
+
+# Détection USB
+detect_usb() {
+    log "🔌 Détection USB..."
+    
+    modprobe xhci_hcd || true
+    modprobe ehci_hcd || true
+    modprobe ohci_hcd || true
+    modprobe uhci_hcd || true
+}
+
+# Configuration spécifique à la virtualisation
+configure_virtualization() {
+    local virt_type
+    virt_type=$(systemd-detect-virt 2>/dev/null || echo "none")
+    
+    case "$virt_type" in
+        "vmware")
+            log "🖥️ Configuration VMware"
+            modprobe vmw_balloon || true
+            modprobe vmw_vmci || true
+            modprobe vmw_vsock_vmci_transport || true
+            ;;
+        "kvm"|"qemu")
+            log "🖥️ Configuration KVM/QEMU"
+            modprobe virtio_balloon || true
+            modprobe virtio_rng || true
+            ;;
+        "microsoft")
+            log "🖥️ Configuration Hyper-V"
+            modprobe hv_vmbus || true
+            modprobe hv_utils || true
+            modprobe hv_balloon || true
+            ;;
+        "virtualbox")
+            log "🖥️ Configuration VirtualBox"
+            modprobe vboxguest || true
+            modprobe vboxsf || true
+            modprobe vboxvideo || true
+            ;;
+        "none")
+            log "🖥️ Matériel physique détecté"
+            ;;
+        *)
+            log "🖥️ Virtualisation inconnue: $virt_type"
+            ;;
+    esac
+}
+
+# Optimisations post-détection
+post_detection_optimizations() {
+    log "⚡ Optimisations post-détection..."
+    
+    # Activer les services réseau
+    systemctl enable NetworkManager.service || true
+    
+    # Configuration audio
+    if command -v pulseaudio > /dev/null; then
+        systemctl --global enable pulseaudio.service || true
+    fi
+    
+    # Configuration graphique
+    if command -v X > /dev/null; then
+        # Générer une configuration X11 basique
+        mkdir -p /etc/X11/xorg.conf.d
+        cat > /etc/X11/xorg.conf.d/20-archfusion-auto.conf << 'EOF'
+Section "Device"
+    Identifier "Auto-detected GPU"
+    Driver "modesetting"
+    Option "AccelMethod" "glamor"
+EndSection
+
+Section "ServerFlags"
+    Option "AutoAddDevices" "true"
+    Option "AutoEnableDevices" "true"
+EndSection
+EOF
+    fi
+}
+
+# Fonction principale
+main() {
+    log "🚀 Démarrage de la détection matérielle ArchFusion OS"
+    
+    # Créer le fichier de log
+    mkdir -p "$(dirname "$LOG_FILE")"
+    touch "$LOG_FILE"
+    
+    # Détections
+    detect_gpu
+    detect_network
+    detect_audio
+    detect_storage
+    detect_usb
+    configure_virtualization
+    post_detection_optimizations
+    
+    # Informations système
+    log "📊 Informations système:"
+    log "Kernel: $(uname -r)"
+    log "Architecture: $(uname -m)"
+    log "Virtualisation: $(systemd-detect-virt 2>/dev/null || echo 'none')"
+    log "Modules chargés: $(lsmod | wc -l)"
+    
+    log "✅ Détection matérielle terminée avec succès"
+}
+
+# Exécution
+main "$@"
