@@ -1,10 +1,14 @@
 # 🚀 ArchFusion OS
 
-**Une distribution Linux moderne basée sur Arch Linux, conçue pour offrir une expérience utilisateur exceptionnelle avec la puissance et la flexibilité d'Arch.**
-
-![ArchFusion OS](https://img.shields.io/badge/ArchFusion-OS-blue?style=for-the-badge&logo=arch-linux)
-![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
-![License](https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge)
+<div align="center">
+  <img src="assets/logos/archfusion-logo.svg" alt="ArchFusion OS Logo" width="200"/>
+  
+  **Une distribution Linux moderne basée sur Arch Linux, conçue pour offrir une expérience utilisateur exceptionnelle avec la puissance et la flexibilité d'Arch.**
+  
+  ![ArchFusion OS](https://img.shields.io/badge/ArchFusion-OS-blue?style=for-the-badge&logo=arch-linux)
+  ![Version](https://img.shields.io/badge/Version-1.0.0-green?style=for-the-badge)
+  ![License](https://img.shields.io/badge/License-GPL--3.0-red?style=for-the-badge)
+</div>
 
 ## 🌟 Caractéristiques Principales
 
