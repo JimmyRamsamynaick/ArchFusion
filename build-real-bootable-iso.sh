@@ -11,6 +11,8 @@ OUTPUT_DIR="$SCRIPT_DIR/iso"
 ISO_NAME="ArchFusion-OS-Bootable-$(date +%Y%m%d).iso"
 WORK_DIR="/tmp/archfusion-real-$$"
 ARCH_ISO_URL="https://mirror.rackspace.com/archlinux/iso/latest/archlinux-x86_64.iso"
+ARCH_ISO_NAME="archlinux-2025.09.01-x86_64.iso"
+LOCAL_ARCH_ISO="./archlinux/${ARCH_ISO_NAME}"
 ARCH_ISO_PATH="$SCRIPT_DIR/archlinux-base.iso"
 
 # Couleurs
@@ -64,13 +66,25 @@ check_deps() {
 
 # Télécharger l'ISO Arch Linux officielle
 download_arch_iso() {
-    if [[ ! -f "$ARCH_ISO_PATH" ]]; then
-        log "⬇️ Téléchargement de l'ISO Arch Linux officielle..."
-        curl -L -o "$ARCH_ISO_PATH" "$ARCH_ISO_URL" || error "Échec du téléchargement"
-        success "✅ ISO Arch Linux téléchargée"
-    else
-        log "📀 ISO Arch Linux déjà présente"
+    log "🔍 Vérification de l'ISO Arch Linux..."
+    
+    # Vérifier si l'ISO locale existe
+    if [[ -f "$LOCAL_ARCH_ISO" ]]; then
+        log "✅ ISO Arch Linux trouvée localement: $LOCAL_ARCH_ISO"
+        log "📋 Copie vers le répertoire de travail..."
+        cp "$LOCAL_ARCH_ISO" "$ARCH_ISO_PATH"
+        if [[ $? -eq 0 ]]; then
+            success "✅ ISO copiée avec succès"
+            return 0
+        else
+            error "Erreur lors de la copie de l'ISO locale"
+        fi
     fi
+    
+    # Si pas d'ISO locale, télécharger
+    log "📥 Téléchargement de l'ISO Arch Linux officielle..."
+    curl -L -o "$ARCH_ISO_PATH" "$ARCH_ISO_URL" || error "Échec du téléchargement"
+    success "✅ ISO Arch Linux téléchargée"
 }
 
 # Extraire l'ISO Arch Linux
@@ -84,10 +98,21 @@ extract_arch_iso() {
     if [[ "$OSTYPE" == "darwin"* ]]; then
         local mount_point="/tmp/arch_iso_mount_$$"
         mkdir -p "$mount_point"
-        hdiutil attach "$ARCH_ISO_PATH" -mountpoint "$mount_point" -readonly
-        cp -R "$mount_point"/* "$WORK_DIR/extract/"
-        hdiutil detach "$mount_point"
-        rmdir "$mount_point"
+        
+        # Essayer différentes méthodes de montage pour macOS
+        if hdiutil attach "$ARCH_ISO_PATH" -mountpoint "$mount_point" -readonly -nobrowse 2>/dev/null; then
+            cp -R "$mount_point"/* "$WORK_DIR/extract/" 2>/dev/null || cp -R "$mount_point"/. "$WORK_DIR/extract/"
+            hdiutil detach "$mount_point" 2>/dev/null
+        else
+            # Alternative: utiliser 7z si disponible
+            if command -v 7z >/dev/null 2>&1; then
+                log "📦 Utilisation de 7z pour l'extraction..."
+                7z x "$ARCH_ISO_PATH" -o"$WORK_DIR/extract" >/dev/null
+            else
+                error "Impossible de monter l'ISO. Installez 7zip: brew install p7zip"
+            fi
+        fi
+        [[ -d "$mount_point" ]] && rmdir "$mount_point" 2>/dev/null
     else
         # Linux
         sudo mount -o loop "$ARCH_ISO_PATH" "$WORK_DIR/extract"
@@ -104,7 +129,14 @@ extract_rootfs() {
     
     local airootfs_sfs="$WORK_DIR/extract/arch/x86_64/airootfs.sfs"
     if [[ -f "$airootfs_sfs" ]]; then
-        unsquashfs -d "$WORK_DIR/squashfs" "$airootfs_sfs"
+        # Nettoyer le répertoire de destination d'abord
+        rm -rf "$WORK_DIR/squashfs"
+        mkdir -p "$WORK_DIR/squashfs"
+        
+        # Extraire avec options pour éviter les conflits
+        unsquashfs -f -d "$WORK_DIR/squashfs" "$airootfs_sfs" 2>/dev/null || \
+        unsquashfs -no-xattrs -f -d "$WORK_DIR/squashfs" "$airootfs_sfs"
+        
         success "✅ Système de fichiers extrait"
     else
         error "Fichier airootfs.sfs non trouvé"
@@ -324,7 +356,13 @@ generate_checksums() {
 # Nettoyage
 cleanup() {
     log "🧹 Nettoyage..."
-    rm -rf "$WORK_DIR"
+    
+    # Forcer le nettoyage avec sudo si nécessaire
+    if [[ -d "$WORK_DIR" ]]; then
+        chmod -R 755 "$WORK_DIR" 2>/dev/null || true
+        rm -rf "$WORK_DIR" 2>/dev/null || sudo rm -rf "$WORK_DIR"
+    fi
+    
     success "✅ Nettoyage terminé"
 }
 
